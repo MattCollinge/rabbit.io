@@ -1,0 +1,12 @@
+{
+
+  "name":"node-rabbit-client",
+  "author": "Tom Scott",
+  "version":"0.0.1",
+  "dependencies":{
+    "amqp":">= 0.1.0",
+    "sanitizer": "*",    
+    "socket.io": ">=0.8"
+  }
+
+}
