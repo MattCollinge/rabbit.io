@@ -13,11 +13,12 @@
 
     <script>
         function message(obj) {
-            //$('chat').append('<p><em>' + esc(obj) + '</em></p>');
-        var el = document.createElement('p');
-        el.innerHTML = '<em>' + esc(obj) + '</em>';
-        document.getElementById('chat').appendChild(el);
-        document.getElementById('chat').scrollTop = 1000000;
+            $('#chat').append('<p><em>' + esc(obj) + '</em></p>');
+           // $('#chat').scrollTop = 1000000;
+//        var el = document.createElement('p');
+//        el.innerHTML = '<em>' + esc(obj) + '</em>';
+//        document.getElementById('chat').appendChild(el);
+       // document.getElementById('chat').scrollTop = 1000000;
       }
 
       var conn = io.connect('http://localhost:8083');
@@ -25,7 +26,11 @@
       function send(){
         var val = document.getElementById('text').value;
         conn.send(val);
-      }
+    }
+
+    function setSessionID() {
+        conn.emit('set nickname', 'blob');
+    }
 
       function esc(msg){
         return msg.replace(/</g, '&lt;').replace(/>/g, '&gt;');
@@ -33,7 +38,9 @@
 
       conn.on('message', function(obj){
         message(obj);
-      });
+    });
+
+    setSessionID();
     </script>
 
     <div id="chat"></div>

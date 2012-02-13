@@ -37,11 +37,21 @@ function setup() {
   console.log("Set up complete!");
 }
 
-socketioserver.sockets.on('connection', function(connection) {
-      publisher.publish = function(msg){
-          console.log(msg);
-          connection.send(msg.data.toString())
-      };
+socketioserver.sockets.on('connection', function (connection) {
+
+    publisher.publish = function (msg) {
+        console.log(msg);
+        connection.send(msg.data.toString());
+    };
+
+    connection.on('set nickname', function (name) {
+        connection.set('nickname', name, function () {
+            console.log('Setting Nick');
+            connection.send('ready');
+        })
+    });
+
+
 });
 
 console.log("Starting ... AMQP URL: " + rabbitUrl());
