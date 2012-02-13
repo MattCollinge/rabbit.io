@@ -5,13 +5,13 @@ var fs = require('fs');
 var io = require('socket.io');
 
 function rabbitUrl() {  
-    return "amqp://172.16.134.128";
+    return "amqp://127.0.0.1";
 }
 
 var httpserver = http.createServer(handler);
 var socketioserver = io.listen(httpserver);
 
-var port = process.env.VCAP_APP_PORT || 3000;
+var port = 8083; //process.env.VCAP_APP_PORT || 3000;
 
 var messages = [];
 var exchange = {};
@@ -40,7 +40,7 @@ function setup() {
 socketioserver.sockets.on('connection', function(connection) {
       publisher.publish = function(msg){
           console.log(msg);
-          connection.send(msg)
+          connection.send(msg.data.toString())
       };
 });
 
@@ -58,4 +58,4 @@ function handler(req, res) {
     });  
 }
 
-httpserver.listen(8081);
+httpserver.listen(port);

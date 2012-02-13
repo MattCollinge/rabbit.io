@@ -3,6 +3,7 @@
   <head>
     <title>Price Publishing Example</title>
     <script src="/socket.io/socket.io.js"></script>
+    <script src='//code.jquery.com/jquery.min.js' charset='utf-8'></script>
   </head>
   <body>
 
@@ -11,14 +12,15 @@
     </p>
 
     <script>
-      function message(obj){
+        function message(obj) {
+            //$('chat').append('<p><em>' + esc(obj) + '</em></p>');
         var el = document.createElement('p');
-        el.innerHTML = '<em>' + esc(obj) + '</em>'
+        el.innerHTML = '<em>' + esc(obj) + '</em>';
         document.getElementById('chat').appendChild(el);
         document.getElementById('chat').scrollTop = 1000000;
       }
 
-      var conn = io.connect('http://localhost:8081');
+      var conn = io.connect('http://localhost:8083');
 
       function send(){
         var val = document.getElementById('text').value;
