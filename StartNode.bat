@@ -1,2 +1,2 @@
-start "debugger" "node-inspector" &
-start "app" "node" --debug-brk app.js
+start "debugger" "startnodeinspector.bat"
+start "app" "startnodeapp"

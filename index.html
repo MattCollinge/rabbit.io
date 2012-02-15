@@ -22,6 +22,7 @@
       }
 
       var conn = io.connect('http://localhost:8083');
+      var sessionId;
 
       function send(){
         var val = document.getElementById('text').value;
@@ -36,11 +37,16 @@
         return msg.replace(/</g, '&lt;').replace(/>/g, '&gt;');
       };
 
-      conn.on('message', function(obj){
-        message(obj);
+      conn.on('message', function (obj) {
+          message(obj);
+      });
+
+      conn.on('sessionId', function(obj){
+      sessionId = obj;
+        message('Got sessionId from server:' + sessionId);
     });
 
-    setSessionID();
+    //setSessionID();
     </script>
 
     <div id="chat"></div>
